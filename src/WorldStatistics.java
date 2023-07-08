@@ -29,14 +29,13 @@ public class WorldStatistics {
         return countryCodes;
     }
 
+
     public Set<String> getCitiesOfCountry(String countryCode) {
-        Country country = findCountryByISoCode(countryCode);
         Set<String> cityNames = new HashSet<>();
-        if (country == null) {
-            return null;
-        }
-        for (City city : country.getCities()) {
-            cityNames.add(city.getCityName());
+        for (City city : cities) {
+            if (city.getCityCode().equals(countryCode)) {
+                cityNames.add(city.getCityName());
+            }
         }
         return cityNames;
     }
@@ -44,10 +43,7 @@ public class WorldStatistics {
     public int countAhmeds() {
         int count = 0;
         for (Country country : countries) {
-            if (country.getPresident() != null &&
-                    (country.getPresident().contains("Hamad")
-                            || country.getPresident().contains("Ahmad")
-                            || country.getPresident().contains("Ahmed"))) {
+            if (country.getPresident() != null && (country.getPresident().contains("Hamad") || country.getPresident().contains("Ahmad") || country.getPresident().contains("Ahmed"))) {
                 count++;
             }
         }
