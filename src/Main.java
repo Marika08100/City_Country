@@ -44,10 +44,9 @@ public class Main {
         }
 
         Country country = worldStatistics.findCountryByISoCode("HUN");
-        if (country != null) {
-            System.out.println("Népsűrűség: " + country.getPopulationDensity());
-            System.out.println("Rurális népesség: " + country.getRuralPopulation());
-        }
+        System.out.println(worldStatistics.findCountryByISoCode("HUN"));
+        System.out.println("Népsűrűség: " + country.getPopulationDensity());
+        System.out.println("Rurális népesség: " + country.getRuralPopulation());
 
         System.out.println("Europe országkódjai: " + worldStatistics.getCountriesOfContinent("Europe"));
 
@@ -59,6 +58,19 @@ public class Main {
         System.out.println("A leggyakoribb kezdőbetű: " + worldStatistics.getPopularFirstLetter());
 
         System.out.println("Legutoljára függetlenedett ország: " + worldStatistics.lastIndependentCountryCode());
-    }
 
+
+        City city = new City("Budapest", "HUN", 1779000);
+        if (country != null) {
+            city.setCountry(country);
+            if (city.getPopulationPercentage() != -1) {
+                System.out.println("A város populációja az anyaországéhoz viszonyítva: " + city.getPopulationPercentage() + "%");
+            } else {
+                System.out.println("Nincs elegendő adat a számításhoz.");
+            }
+        } else {
+            System.out.println("Nem található ország az adott országkóddal.");
+        }
+    }
 }
+

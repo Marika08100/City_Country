@@ -20,13 +20,13 @@ public class WorldStatistics {
     }
 
     public List<String> getCountriesOfContinent(String continentName) {
-        List<String> countryCodes = new ArrayList<>();
+        List<String> contriesOfTheContinent = new ArrayList<>();
         for (Country country : countries) {
-            if (country.getContinent().equalsIgnoreCase(continentName)) {
-                countryCodes.add(country.getCountryCode());
+            if (country.getContinent().equals(continentName)) {
+                contriesOfTheContinent.add(country.getCountryCode());
             }
         }
-        return countryCodes;
+        return contriesOfTheContinent;
     }
 
 
@@ -53,13 +53,12 @@ public class WorldStatistics {
     public String getPopularFirstLetter() {
         Map<Character, Integer> letterCount = new HashMap<>();
         for (Country country : countries) {
-            String countryCode = country.getCountryCode();
-            char firstLetter = countryCode.charAt(0);
+            char firstLetter = country.getCountryCode().charAt(0);
             letterCount.put(firstLetter, letterCount.getOrDefault(firstLetter, 0) + 1);
         }
         //  System.out.println(letterCount);
         char mostLetter = ' ';
-        int maxCount = 0;
+        int maxCount = Integer.MIN_VALUE;
 
         for (Map.Entry<Character, Integer> entry : letterCount.entrySet()) {
             if (entry.getValue() > maxCount) {
@@ -75,14 +74,21 @@ public class WorldStatistics {
     public String lastIndependentCountryCode() {
         Country lastIndependent = null;
         for (Country actual : countries) {
-            if (actual.getIndependenceYear() != null) {
+            if (actual.getIndependenceYear() != null && !actual.getIndependenceYear().equals("NULL")) {
                 lastIndependent = actual;
                 break;
             }
         }
-        return String.valueOf(lastIndependent);
-
+        for (Country actual : countries) {
+            if (actual.getIndependenceYear() != null && !actual.getIndependenceYear().equals("NULL")) {
+                if (Integer.parseInt(lastIndependent.getIndependenceYear()) < Integer.parseInt(actual.getIndependenceYear())) {
+                    lastIndependent = actual;
+                }
+            }
+        }
+        return lastIndependent == null ? "" : lastIndependent.getCountryCode();
     }
+
 
     public List<Country> getCountries() {
         return countries;

@@ -10,6 +10,14 @@ public class City {
         this.cityCode = cityCode;
         this.cityPopulation = cityPopulation;
     }
+    public double getPopulationPercentage() {
+        if (cityPopulation == 0 || country == null || country.getPopulation() == 0) {
+            return -1;
+        }
+
+        return (double) cityPopulation / country.getPopulation();
+    }
+
     public String getCityName() {
         return cityName;
     }
