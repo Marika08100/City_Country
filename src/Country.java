@@ -1,6 +1,5 @@
 import java.util.*;
 
-// Country osztály
 class Country {
     private String countryCode;
     private String countryName;

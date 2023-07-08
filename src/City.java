@@ -42,4 +42,7 @@ public class City {
                 ", cityPopulation=" + cityPopulation +
                 '}';
     }
+
+    public void setCountry(Country country) {
+    }
 }
