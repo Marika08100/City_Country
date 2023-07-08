@@ -9,7 +9,7 @@ class Country {
     private String independenceYear;
     private long population;
     private String president;
-    private List<City> cities;
+    private List<City> cities = new ArrayList<>();
 
     public Country(String countryCode, String countryName, String continent, String region, double area,
                    String independenceYear, long population, String president) {
@@ -24,19 +24,26 @@ class Country {
         this.cities = new ArrayList<>();
     }
     public double getPopulationDensity(){
-        if(area == 0 || population == 0){
+        if(isUndefined()){
             return -1;
         }
         return population / area;
 
     }
-    public double getRuralPopulation(){
-        long urbanPopulation = 0;
-        for(City city : cities){
-            urbanPopulation += city.getCityPopulation();
-        }
-        return urbanPopulation;
+
+    private boolean isUndefined() {
+        return area == 0 || population == 0;
     }
+
+    public double getRuralPopulation(){
+        long ruralPopulation = 0;
+        for(City city : cities){
+            System.out.println(city);
+            ruralPopulation += city.getCityPopulation();
+        }
+        return population - ruralPopulation;
+    }
+
 
 
     public String getCountryCode() {
@@ -108,8 +115,7 @@ class Country {
     }
 
     public void addCity(City city) {
-        cities.add(city);
-        city.setCountry(this);
+      this.cities.add(city);
     }
 
     @Override

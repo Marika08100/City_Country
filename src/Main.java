@@ -3,8 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
+
     public static void main(String[] args) {
 
 
@@ -43,11 +45,20 @@ public class Main {
 
         Country country = worldStatistics.findCountryByISoCode("HUN");
         if (country != null) {
-            System.out.println(country.getPopulationDensity());
-            System.out.println(country.getRuralPopulation());
+            System.out.println("Népsűrűség: " + country.getPopulationDensity());
+            System.out.println("Rurális népesség: " + country.getRuralPopulation());
         }
-        List<String> countryCities = worldStatistics.getCountriesOfContinent("Europa");
-        System.out.println(countryCities);
 
+        System.out.println("Europe országkódjai: " + worldStatistics.getCountriesOfContinent("Europe"));
+
+        System.out.println("Magyarország városai: " + worldStatistics.getCitiesOfCountry("HUN"));
+
+
+        System.out.println("Ahmed névű elnökök száma: " + worldStatistics.countAhmeds());
+
+        System.out.println("A leggyakoribb kezdőbetű: " + worldStatistics.getPopularFirstLetter());
+
+        System.out.println("Legutoljára függetlenedett ország: " + worldStatistics.lastIndependentCountryCode());
     }
+
 }
